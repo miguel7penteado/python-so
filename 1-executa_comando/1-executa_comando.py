@@ -3,7 +3,7 @@
 import subprocess
 try:
     #imprime o resultado e mescla stdout e std
-    resultado = subprocess.check_output("echo o nome do usuario eh %USERNAME%", stderr=subprocess.STDOUT, shell=True)
+    resultado = subprocess.check_output("echo o nome do usuario eh ${USER} ", stderr=subprocess.STDOUT, shell=True)
     print resultado
     #causa erro e mescla stdout e stderr
     resultado = subprocess.check_output("copy asdfjaefda", stderr=subprocess.STDOUT, shell=True)
