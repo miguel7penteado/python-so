@@ -4,39 +4,39 @@ from PyQt4 import QtGui,QtCore
 class gui(QtGui.QMainWindow):
     def __init__(self):
         super(gui, self).__init__()
-        self.initUI()
+        self.iniciarJanela()
 
-    def dataReady(self):
-        cursor = self.output.textCursor()
-        cursor.movePosition(cursor.End)
-        cursor.insertText(str(self.process.readAll()))
+    def chegouInformacao(self):
+        meu_cursor = self.output.textCursor()
+        meu_cursor.movePosition(meu_cursor.End)
+        meu_cursor.insertText(str(self.process.readAll()))
         self.output.ensureCursorVisible()
 
-    def callProgram(self):
-        # run the process
-        # `start` takes the exec and a list of arguments
+    def executarPrograma(self):
+        # roda o processo
+        # `start` recebe o programa executavel e a lista de argumentos
         self.process.start('ping',['127.0.0.1'])
 
-    def initUI(self):
+    def iniciarJanela(self):
         # Layout eh melhor para colocar componentes
-        layout = QtGui.QHBoxLayout()
-        self.runButton = QtGui.QPushButton('Run')
-        self.runButton.clicked.connect(self.callProgram)
+        meu_enquadramento = QtGui.QHBoxLayout()
+        self.runButton = QtGui.QPushButton('Executar')
+        self.runButton.clicked.connect(self.executarPrograma)
 
         self.output = QtGui.QTextEdit()
 
-        layout.addWidget(self.output)
-        layout.addWidget(self.runButton)
+        meu_enquadramento.addWidget(self.output)
+        meu_enquadramento.addWidget(self.runButton)
 
-        centralWidget = QtGui.QWidget()
-        centralWidget.setLayout(layout)
-        self.setCentralWidget(centralWidget)
+        componente_central = QtGui.QWidget()
+        componente_central.setLayout(meu_enquadramento)
+        self.setCentralWidget(componente_central)
 
         # Objeto QProcess para app externa
         self.process = QtCore.QProcess(self)
         
         # QProcess emite`readyRead` quando ha dados para ler
-        self.process.readyRead.connect(self.dataReady)
+        self.process.readyRead.connect(self.chegouInformacao)
 
         # Prevenindo multiplas execucoes
         # desativando o botao quando o processo iniciar e reativando quando finalizar
@@ -46,11 +46,12 @@ class gui(QtGui.QMainWindow):
 
 #Funcao principal inicio
 def main():
-    app = QtGui.QApplication(sys.argv)
-    ui=gui()
-    ui.show()
-    sys.exit(app.exec_())
+    aplicacao = QtGui.QApplication(sys.argv)
+    MinhaJanela = gui()
+    MinhaJanela.show()
+    sys.exit(aplicacao.exec_())
 #fim da funcao principal
 
 if __name__ == '__main__':
-    main() 
+    main()
+    
