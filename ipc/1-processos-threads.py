@@ -1,3 +1,4 @@
+
 from threading import Thread
 from Queue import Queue
 import datetime
@@ -49,3 +50,8 @@ fila_de_threads.join()
 with open('arquivo_saida.txt', 'a') as ponteiro_arquivo_saida:
     for r in resultado_saida:
         ponteiro_arquivo_saida.write(r + "\n")
+
+# Referências
+# http://sharats.me/the-ever-useful-and-neat-subprocess-module.html
+# http://stackoverflow.com/questions/32364849/what-difference-between-subprocess-call-and-subprocess-popen-makes-pipe-less
+
